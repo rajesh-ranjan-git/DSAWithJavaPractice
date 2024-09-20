@@ -1,11 +1,12 @@
 public class NumberConversion {
     public static void main(String[] args) {
-        decimalToAnyBase(11, 2);
-        anyBaseToDecimal(1011, 2);
-        findEvenOdd(14585874);
-        reverseNumber(15465);
-        double res = power(10, 6);
-        System.out.println(res);
+        // decimalToAnyBase(11, 2);
+        // anyBaseToDecimal(1011, 2);
+        // findEvenOdd(14585874);
+        // reverseNumber(15465);
+        // double res = power(10, 6);
+        // System.out.println(res);
+        fastExponentiation(16, 7);
     }
 
     static double power(int num, int pow) {
@@ -54,6 +55,18 @@ public class NumberConversion {
             num /= 10;
         }
 
+        System.out.println(res);
+    }
+
+    static void fastExponentiation(int num, int pow) {
+        int res = 1;
+        while (pow > 0) {
+            if (pow % 2 != 0) {
+                res *= num;
+            }
+            num *= num;
+            pow /= 2;
+        }
         System.out.println(res);
     }
 }
