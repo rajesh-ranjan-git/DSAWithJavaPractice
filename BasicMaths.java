@@ -2,19 +2,20 @@ import java.util.Arrays;
 
 public class BasicMaths {
     public static void main(String[] args) {
-        // countDigits(657689);
-        // countDigitsEfficient(657689);
-        // findArmstrong(373);
-        // checkPalindrome(121);
-        // printAllDivisors(13);
-        // checkPrime(37);
-        // sieveOfEratosthenes(37);
-        // System.out.println((int)newtonRaphsonAlgo(25));
-        // gcd(0, 5);
-        // euclideanGCD(24, 36);
-        // System.out.println("GCD : " + efficientEuclideanGCD(24, 36));
-        // lcm(24, 36);
+        countDigits(657689);
+        countDigitsEfficient(657689);
+        findArmstrong(373);
+        checkPalindrome(121);
+        printAllDivisors(13);
+        checkPrime(37);
+        sieveOfEratosthenes(37);
+        System.out.println((int)newtonRaphsonAlgo(25));
+        gcd(0, 5);
+        euclideanGCD(24, 36);
+        System.out.println("GCD : " + efficientEuclideanGCD(24, 36));
+        lcm(24, 36);
         factorial(5);
+        trailingZeroesInFact(30);
         
     }
 
@@ -187,5 +188,13 @@ public class BasicMaths {
             num--;
         }
         System.out.println("Factorial of num : " + res);
+    }
+
+    static void trailingZeroesInFact(int num) {
+        int res = 0;
+        for (int i = 5; i <= num; i *= i) {
+            res += Math.floor(num / i);
+        }
+        System.out.println("Number of trailing zeroes are : " + res);
     }
 }
