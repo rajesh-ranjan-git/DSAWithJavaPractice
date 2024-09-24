@@ -1,6 +1,6 @@
 public class BitManipulation {
     public static void main(String[] args) {
-        printBits(67);
+        printBits(65);
         System.out.println(isBitSet(20, 4));;
         findOddEven(20);
         printBits(findIthBit(20, 4));
@@ -10,6 +10,18 @@ public class BitManipulation {
         isPowerOf2(42);
         printBits(unSetRightMostBit(48));
         noOfSetBits(67);
+        printBits(clearLSB(53, 4));
+        printBits(clearMSB(53, 4));
+        printBits(clearLSBExclusive(53, 4));
+        printBits(clearMSBExclusive(53, 4));
+        System.out.println((char)(convertToLowerCase('A')));
+        System.out.println((char)(convertToUpperCase('a')));
+        System.out.println((char)(convertToLowerCaseWithSpace('A')));
+        System.out.println((char)(convertToUpperCaseWithSpace('a')));
+        System.out.println((char)(convertToUpperCaseWithUnderscore('a')));
+        swapNumbers(8, 9);
+        int arr[] = {2, 4, 2, 6, 3, 3 , 1, 1, 6};
+        printUniqueElement(arr);
     }
 
     static void printBits(int num) {
@@ -67,5 +79,58 @@ public class BitManipulation {
             count++;
         }
         System.out.println(count);
+    }
+
+    static int clearLSB(int num, int bit) {
+        return (num & (~ ((1 << (bit + 1)) - 1)));
+    }
+
+    static int clearLSBExclusive(int num, int bit) {
+        return (num & (~ ((1 << bit) - 1)));
+    }
+
+    static int clearMSB(int num, int bit) {
+        return (num & ((1 << bit) - 1));
+    }
+
+    static int clearMSBExclusive(int num, int bit) {
+        return (num & ((1 << (bit + 1)) - 1));
+    }
+
+    static int convertToLowerCase(int num) {
+        return (num | (1 << 5));
+    }
+
+    static int convertToUpperCase(int num) {
+        return (num & (~(1 << 5)));
+    }
+
+    static int convertToLowerCaseWithSpace(int num) {
+        return (num | (' '));
+    }
+
+    static int convertToUpperCaseWithSpace(int num) {
+        return (num & (~(' ')));
+    }
+
+    static int convertToUpperCaseWithUnderscore(int num) {
+        return (num & ('_'));
+    }
+
+    static void swapNumbers(int num1, int num2) {
+        System.out.println("Num1 : " + num1 + " and Num2 is : " + num2);
+        num1 = num1 ^ num2;
+        num2 = num1 ^ num2;
+        num1 = num1 ^ num2;
+        System.out.println("Num1 : " + num1 + " and Num2 is : " + num2);
+    }
+
+    static void printUniqueElement(int arr[]) {
+        int l = arr.length;
+        int res = 0;
+        for (int i = 0; i < l; i++) {
+            res = res ^ arr[i];
+        }
+        System.out.println(res);
     }
 }
