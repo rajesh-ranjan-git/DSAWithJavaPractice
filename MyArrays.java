@@ -3,30 +3,31 @@ import java.util.Scanner;
 
 public class MyArrays {
     public static void main(String[] args) {
-        // int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
         // int arr[] = new int[8];
         // System.out.print("Initially array elements are prefilled with 0s.\nInitial array : ");
-        // printArray(arr);
+        printArray(arr);
         // takeArrayInput(arr);
         // printArray(arr);
-        // insertIntoArray(arr, 3, 9);
-        // printArray(arr);
-        // deleteFromArray(arr, 3);
-        // printArray(arr);
-        // updateArray(arr, 3, 10);
-        // printArray(arr);
+        insertIntoArray(arr, 3, 9);
+        printArray(arr);
+        deleteFromArray(arr, 3);
+        printArray(arr);
+        updateArray(arr, 3, 10);
+        printArray(arr);
 
         int arr2D[][] = new int[4][3];
         System.out.print("Initially array elements are prefilled with 0s.\nInitial array : ");
         printArray2D(arr2D);
-        takeArrayInput2D(arr2D);
+        // takeArrayInput2D(arr2D);
+        // printArray2D(arr2D);
+        insertIntoArray2D(arr2D, 1, 1, 9);
+        insertIntoArray2D(arr2D, 1, 2, 5);
         printArray2D(arr2D);
-        // insertIntoArray2D(arr2D, 3, 9);
-        // printArray2D(arr);
-        // deleteFromArray2D(arr2D, 3);
-        // printArray2D(arr2D);
-        // updateArray2D(arr2D, 3, 10);
-        // printArray2D(arr2D);
+        deleteFromArray2D(arr2D, 1, 1);
+        printArray2D(arr2D);
+        updateArray2D(arr2D, 1, 0, 10);
+        printArray2D(arr2D);
     }
 
     static void printArray(int arr[]) {
@@ -52,21 +53,33 @@ public class MyArrays {
     }
 
     static void insertIntoArray(int arr[], int pos, int ele) {
-        for (int i = arr.length - 2; i >= pos; i--) {
-            arr[i + 1] = arr[i];
+        if (pos >= 0 && pos < arr.length) {
+            for (int i = arr.length - 2; i >= pos; i--) {
+                arr[i + 1] = arr[i];
+            }
+            arr[pos] = ele;
+        } else {
+            System.out.println("Wrong position entered : " + pos);
         }
-        arr[pos] = ele;
     }
 
     static void deleteFromArray(int arr[], int pos) {
-        for (int i = pos; i < arr.length - 1; i++) {
-            arr[i] = arr[i + 1];
+        if (pos >= 0 && pos < arr.length) {
+            for (int i = pos; i < arr.length - 1; i++) {
+                arr[i] = arr[i + 1];
+            }
+            arr[arr.length - 1] = 0;
+        } else {
+            System.out.println("Wrong position entered : " + pos);
         }
-        arr[arr.length - 1] = 0;
     }
 
     static void updateArray(int arr[], int pos, int ele) {
-        arr[pos] = ele;
+        if (pos >= 0 && pos < arr.length) {
+            arr[pos] = ele;
+        } else {
+            System.out.println("Wrong position entered : " + pos);
+        }
     }
 
     static void printArray2D(int arr[][]) {
@@ -102,4 +115,29 @@ public class MyArrays {
         }
         sc.close();
     }
+
+    static void insertIntoArray2D(int arr[][], int pos1, int pos2, int ele) {
+        if (pos1 >= 0 && pos1 < arr.length) {
+            insertIntoArray(arr[pos1], pos2, ele);
+        } else {
+            System.out.println("Wrong position entered : " + pos1);
+        }
+    }
+    
+    static void deleteFromArray2D(int arr[][], int pos1, int pos2) {
+        if (pos1 >= 0 && pos1 < arr.length) {
+            deleteFromArray(arr[pos1], pos2);
+        } else {
+            System.out.println("Wrong position entered : " + pos1);
+        }
+    }
+
+    static void updateArray2D(int arr[][], int pos1, int pos2, int ele) {
+        if (pos1 >= 0 && pos1 < arr.length) {
+            updateArray(arr[pos1], pos2, ele);
+        } else {
+            System.out.println("Wrong position entered : " + pos1);
+        }
+    }
+
 }
