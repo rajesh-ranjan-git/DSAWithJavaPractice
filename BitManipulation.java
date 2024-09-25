@@ -22,8 +22,8 @@ public class BitManipulation {
         // swapNumbers(8, 9);
         // int arr[] = {2, 4, 2, 6, 3, 3 , 1, 1, 6};
         // printUniqueElement(arr);
-        int arr2[] = {7, 2, 4, 2, 6, 3, 3 , 1, 1, 6};
-        printTwoUniqueElement(arr2);
+        // int arr2[] = {7, 2, 4, 2, 6, 3, 3 , 1, 1, 6};
+        // printTwoUniqueElement(arr2);
     }
 
     static void printBits(int num) {
