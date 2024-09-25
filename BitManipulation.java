@@ -1,27 +1,29 @@
 public class BitManipulation {
     public static void main(String[] args) {
-        printBits(65);
-        System.out.println(isBitSet(20, 4));;
-        findOddEven(20);
-        printBits(findIthBit(20, 4));
-        printBits(setIthBit(32, 2));
-        printBits(toggleBit(33, 4));
-        printBits(unSetBit(89, 3));
-        isPowerOf2(42);
-        printBits(unSetRightMostBit(48));
-        noOfSetBits(67);
-        printBits(clearLSB(53, 4));
-        printBits(clearMSB(53, 4));
-        printBits(clearLSBExclusive(53, 4));
-        printBits(clearMSBExclusive(53, 4));
-        System.out.println((char)(convertToLowerCase('A')));
-        System.out.println((char)(convertToUpperCase('a')));
-        System.out.println((char)(convertToLowerCaseWithSpace('A')));
-        System.out.println((char)(convertToUpperCaseWithSpace('a')));
-        System.out.println((char)(convertToUpperCaseWithUnderscore('a')));
-        swapNumbers(8, 9);
-        int arr[] = {2, 4, 2, 6, 3, 3 , 1, 1, 6};
-        printUniqueElement(arr);
+        // printBits(65);
+        // System.out.println(isBitSet(20, 4));;
+        // findOddEven(20);
+        // printBits(findIthBit(20, 4));
+        // printBits(setIthBit(32, 2));
+        // printBits(toggleBit(33, 4));
+        // printBits(unSetBit(89, 3));
+        // isPowerOf2(42);
+        // printBits(unSetRightMostBit(48));
+        // noOfSetBits(67);
+        // printBits(clearLSB(53, 4));
+        // printBits(clearMSB(53, 4));
+        // printBits(clearLSBExclusive(53, 4));
+        // printBits(clearMSBExclusive(53, 4));
+        // System.out.println((char)(convertToLowerCase('A')));
+        // System.out.println((char)(convertToUpperCase('a')));
+        // System.out.println((char)(convertToLowerCaseWithSpace('A')));
+        // System.out.println((char)(convertToUpperCaseWithSpace('a')));
+        // System.out.println((char)(convertToUpperCaseWithUnderscore('a')));
+        // swapNumbers(8, 9);
+        // int arr[] = {2, 4, 2, 6, 3, 3 , 1, 1, 6};
+        // printUniqueElement(arr);
+        int arr2[] = {7, 2, 4, 2, 6, 3, 3 , 1, 1, 6};
+        printTwoUniqueElement(arr2);
     }
 
     static void printBits(int num) {
@@ -132,5 +134,35 @@ public class BitManipulation {
             res = res ^ arr[i];
         }
         System.out.println(res);
+    }
+
+    static void printTwoUniqueElement(int arr[]) {
+        int l = arr.length;
+        int res = 0;
+        for (int i = 0; i < l; i++) {
+            res = res ^ arr[i];
+        }
+
+        int setBitPos = 0;
+        int bit = 0;
+        while (res != 0) {
+            if (((res >> bit) & 1) != 0) {
+                setBitPos = bit;
+                break;
+            }
+            bit++;
+        }
+
+        int res1 = 0;
+        for (int i = 0; i < l; i++) {
+            if (((arr[i] >> setBitPos) & 1) != 0) {
+                res1 = res1 ^ arr[i];
+            }
+        }
+
+        int num1 = res ^ res1;
+        int num2 = res ^ num1;
+
+        System.out.println("Num1 : " + num1 + " and Num2 is : " + num2);
     }
 }
