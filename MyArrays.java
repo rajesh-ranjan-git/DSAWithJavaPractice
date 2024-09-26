@@ -3,31 +3,35 @@ import java.util.Scanner;
 
 public class MyArrays {
     public static void main(String[] args) {
-        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        // int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
         // int arr[] = new int[8];
         // System.out.print("Initially array elements are prefilled with 0s.\nInitial array : ");
-        printArray(arr);
+        // printArray(arr);
         // takeArrayInput(arr);
         // printArray(arr);
-        insertIntoArray(arr, 3, 9);
-        printArray(arr);
-        deleteFromArray(arr, 3);
-        printArray(arr);
-        updateArray(arr, 3, 10);
-        printArray(arr);
+        // insertIntoArray(arr, 3, 9);
+        // printArray(arr);
+        // deleteFromArray(arr, 3);
+        // printArray(arr);
+        // updateArray(arr, 3, 10);
+        // printArray(arr);
 
-        int arr2D[][] = new int[4][3];
-        System.out.print("Initially array elements are prefilled with 0s.\nInitial array : ");
-        printArray2D(arr2D);
+        // int arr2D[][] = new int[4][3];
+        // System.out.print("Initially array elements are prefilled with 0s.\nInitial array : ");
+        // printArray2D(arr2D);
         // takeArrayInput2D(arr2D);
         // printArray2D(arr2D);
-        insertIntoArray2D(arr2D, 1, 1, 9);
-        insertIntoArray2D(arr2D, 1, 2, 5);
-        printArray2D(arr2D);
-        deleteFromArray2D(arr2D, 1, 1);
-        printArray2D(arr2D);
-        updateArray2D(arr2D, 1, 0, 10);
-        printArray2D(arr2D);
+        // insertIntoArray2D(arr2D, 1, 1, 9);
+        // insertIntoArray2D(arr2D, 1, 2, 5);
+        // printArray2D(arr2D);
+        // deleteFromArray2D(arr2D, 1, 1);
+        // printArray2D(arr2D);
+        // updateArray2D(arr2D, 1, 0, 10);
+        // printArray2D(arr2D);
+
+        int jaggedArray[][] = new int[3][];
+
+        printJaggedArray(jaggedArray);
     }
 
     static void printArray(int arr[]) {
@@ -46,10 +50,10 @@ public class MyArrays {
     static void takeArrayInput(int arr[]) {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < arr.length; i++) {
-            System.out.print("Enter array element at " + (i + 1) + " : ");
+            System.out.print("Enter array element at " + i + " : ");
             arr[i] = sc.nextInt();
         }
-        sc.close();
+        // sc.close();
     }
 
     static void insertIntoArray(int arr[], int pos, int ele) {
@@ -138,6 +142,17 @@ public class MyArrays {
         } else {
             System.out.println("Wrong position entered : " + pos1);
         }
+    }
+
+    static void printJaggedArray(int arr[][]) {
+        int customSize = 4;
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = new int[customSize];
+            takeArrayInput(arr[i]);
+            customSize--;
+        }
+
+        printArray2D(arr);
     }
 
 }
