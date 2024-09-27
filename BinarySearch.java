@@ -1,37 +1,41 @@
 public class BinarySearch {
     public static void main(String[] args) {
-        int arr1[] = { 2, 5, 7, 11, 13 ,45, 87, 90, 91, 92, 93, 94 };
-        // int arr2[] = { 90, 87, 54, 36, 22, 1 };
-        // binarySearchOrderAgnostic(arr1, 87);
-        // binarySearchOrderAgnostic(arr2, 54);
+        int arr1[] = { 2, 5, 7, 11, 13, 45, 87, 90, 91, 92, 93, 94 };
+        int arr2[] = { 90, 87, 54, 36, 22, 1 };
+        binarySearchOrderAgnostic(arr1, 87);
+        binarySearchOrderAgnostic(arr2, 54);
 
-        // int arr3[] = { 2, 5, 7, 11, 45, 45, 45, 45, 87, 90 };
-        // int arr4[] = { 90, 87, 54, 54, 54, 36, 22, 1 };
-        // int first = firstLastOccurrence(arr3, 45, true);
-        // int last = firstLastOccurrence(arr3, 45, false);
-        // firstLastOccurrence(arr4, 54 ,true);
-        // firstLastOccurrence(arr4, 54 ,false);
-        // firstLastOccurrence(arr4, 56, false);
-        
-        // if (first == -1 || last == -1) {
-        //     System.out.println("45 occurred 0 times.");
-        // } else {
-        //     System.out.println("45 occurred " + (last - first + 1) + " times.");
-        // }
+        int arr3[] = { 2, 5, 7, 11, 45, 45, 45, 45, 87, 90 };
+        int arr4[] = { 90, 87, 54, 54, 54, 36, 22, 1 };
+        int first = firstLastOccurrence(arr3, 45, true);
+        int last = firstLastOccurrence(arr3, 45, false);
+        firstLastOccurrence(arr4, 54, true);
+        firstLastOccurrence(arr4, 54, false);
+        firstLastOccurrence(arr4, 56, false);
 
-        // floorValue(arr1, 1);
-        // floorValue(arr2, 17);
-        // ceilValue(arr1, 94);
-        // ceilValue(arr2, 17);
+        if (first == -1 || last == -1) {
+            System.out.println("45 occurred 0 times.");
+        } else {
+            System.out.println("45 occurred " + (last - first + 1) + " times.");
+        }
 
-        // char chArr1[] = {'c', 'f', 'j'};
-        // nextGreatestCharacter(chArr1, 'c');
-        // char chArr2[] = {'j', 'f', 'c'};
-        // nextGreatestCharacter(chArr2, 'c');
+        floorValue(arr1, 1);
+        floorValue(arr2, 17);
+        ceilValue(arr1, 94);
+        ceilValue(arr2, 17);
 
-        // minAbsoluteDiff(arr1, 0);
+        char chArr1[] = { 'c', 'f', 'j' };
+        nextGreatestCharacter(chArr1, 'c');
+        char chArr2[] = { 'j', 'f', 'c' };
+        nextGreatestCharacter(chArr2, 'c');
+
+        minAbsoluteDiff(arr1, 0);
 
         binarySearchInfiniteArray(arr1, 45);
+
+        int arr5[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                1, };
+        findFirstOccurrenceInBinarySortedArray(arr5, 1);
     }
 
     static void printArray(int arr[]) {
@@ -88,6 +92,11 @@ public class BinarySearch {
     }
     
     static void binarySearchOrderAgnostic(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
         int ans = -1;
 
         if (arr[0] <= arr[arr.length - 1]) {
@@ -153,6 +162,11 @@ public class BinarySearch {
     }
 
     static int firstLastOccurrence(int arr[], int target, boolean isFirst) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return 0;
+        }
+
         int ans = -1;
 
         if (arr[0] <= arr[arr.length - 1]) {
@@ -217,6 +231,11 @@ public class BinarySearch {
     }
 
     static void floorValue(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
         int ans = -1;
 
         if (arr[0] <= arr[arr.length - 1]) {
@@ -276,6 +295,11 @@ public class BinarySearch {
     }
 
     static void ceilValue(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
         int ans = -1;
 
         if (arr[0] <= arr[arr.length - 1]) {
@@ -329,6 +353,11 @@ public class BinarySearch {
     }
 
     static void nextGreatestCharacter(char arr[], char target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
         int ans = '$';
 
         if (arr[0] <= arr[arr.length - 1]) {
@@ -359,6 +388,11 @@ public class BinarySearch {
     }
 
     static void minAbsoluteDiff(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
         int ans = -1;
         int start = 0;
         int end = arr.length - 1;
@@ -410,23 +444,71 @@ public class BinarySearch {
         return ans;
     }
 
-    static void binarySearchInfiniteArray(int arr[], int target) {
-        int start = 0;
-        int end = 1;
-
-        while (target > arr[end]) {            
+    static int[] findRangeForBinarySearch(int arr[], int start, int end, int target) {
+        while (target > arr[end]) {
             start = end;
             end *= 2;
         }
 
-        System.out.println("Range : " + start + " ans " + end);
+        int range[] = new int[2];
+        range[0] = start;
+        range[1] = end;
 
-        int ans = binarySearchAscendingInRange(arr, start, end, target);
+        return range;
+    }
+    
+    static void binarySearchInfiniteArray(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+
+        int range[] = findRangeForBinarySearch(arr, 0, 1, target);
+        System.out.println("Range : " + range[0] + " and " + range[1]);
+
+        int ans = binarySearchAscendingInRange(arr, range[0], range[1], target);
 
         if (ans == -1) {
             System.out.print(target + " is not present in ");
         } else {
             System.out.print(target + " is present at index " + ans + " in ");
+        }
+        printArray(arr);
+    }
+
+    static int firstOccurrenceAscending(int arr[], int start, int end, int target) {
+        int ans = -1;
+
+        while (start <= end) {
+            int mid = start + ((end - start) / 2);
+            if (arr[mid] == target) {
+                ans = mid;
+                end = mid - 1;
+            } else if (arr[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+    
+    static void findFirstOccurrenceInBinarySortedArray(int arr[], int target) {
+        if (arr.length == 0) {
+            System.out.println("Array is empty.");
+            return;
+        }
+        
+        int range[] = findRangeForBinarySearch(arr, 0, 1, target);
+        System.out.println("Range : " + range[0] + " and " + range[1]);
+
+        int ans = firstOccurrenceAscending(arr, range[0], range[1], target);
+
+        if (ans == -1) {
+            System.out.print(target + " is not present in ");
+        } else {
+            System.out.print("First occurrence of " + target + " is at index " + ans + " in ");
         }
         printArray(arr);
     }
