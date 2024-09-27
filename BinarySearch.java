@@ -1,6 +1,6 @@
 public class BinarySearch {
     public static void main(String[] args) {
-        // int arr1[] = { 2, 5, 7, 11 ,45, 87, 90 };
+        int arr1[] = { 2, 5, 7, 11, 13 ,45, 87, 90, 91, 92, 93, 94 };
         // int arr2[] = { 90, 87, 54, 36, 22, 1 };
         // binarySearchOrderAgnostic(arr1, 87);
         // binarySearchOrderAgnostic(arr2, 54);
@@ -11,27 +11,27 @@ public class BinarySearch {
         // int last = firstLastOccurrence(arr3, 45, false);
         // firstLastOccurrence(arr4, 54 ,true);
         // firstLastOccurrence(arr4, 54 ,false);
-        // firstLastOccurrence(arr4, 56 ,false);
+        // firstLastOccurrence(arr4, 56, false);
+        
         // if (first == -1 || last == -1) {
         //     System.out.println("45 occurred 0 times.");
         // } else {
         //     System.out.println("45 occurred " + (last - first + 1) + " times.");
         // }
 
-        // int arr5[] = { 2, 5, 7, 11, 45, 87, 90 };
-        // int arr6[] = { 90, 87, 54, 36, 22, 1 };
-        // floorValue(arr5, 1);
-        // floorValue(arr6, 17);
-
-        // int arr7[] = { 2, 5, 7, 11, 45, 87, 90 };
-        // int arr8[] = { 90, 87, 54, 36, 22, 1 };
-        // ceilValue(arr7, 94);
-        // ceilValue(arr8, 17);
+        // floorValue(arr1, 1);
+        // floorValue(arr2, 17);
+        // ceilValue(arr1, 94);
+        // ceilValue(arr2, 17);
 
         // char chArr1[] = {'c', 'f', 'j'};
         // nextGreatestCharacter(chArr1, 'c');
         // char chArr2[] = {'j', 'f', 'c'};
         // nextGreatestCharacter(chArr2, 'c');
+
+        // minAbsoluteDiff(arr1, 0);
+
+        binarySearchInfiniteArray(arr1, 45);
     }
 
     static void printArray(int arr[]) {
@@ -356,5 +356,78 @@ public class BinarySearch {
             }
         }
         System.out.println();
+    }
+
+    static void minAbsoluteDiff(int arr[], int target) {
+        int ans = -1;
+        int start = 0;
+        int end = arr.length - 1;
+
+        while (start <= end) {
+            int mid = start + ((end - start) / 2);
+            if (arr[mid] == target) {
+                ans = mid;
+                break;
+            } else if (arr[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        if (ans == -1) {
+            if (end == -1) {
+                System.out.println("Minimum Absolute difference is : " + (int) Math.abs(target - arr[start]));
+            } else if (start == arr.length) {
+                System.out.println("Minimum Absolute difference is : " + (int) Math.abs(target - arr[end]));
+            } else {
+                int ansFloor = (int) Math.abs(target - arr[end]);
+                int ansCeil = (int) Math.abs(target - arr[start]);
+                System.out.println("New ansFloor : " + ansFloor + " New ansCeil : " + ansCeil);
+                int newAns = (ansFloor > ansCeil) ? ansCeil : ansFloor;
+                System.out.println("Minimum Absolute difference is : " + newAns);
+            }
+        } else {
+            System.out.println("Minimum Absolute difference is : " + 0);
+        }
+    }
+
+    static int binarySearchAscendingInRange(int arr[], int start, int end, int target) {
+        int ans = -1;
+
+        while (start <= end) {
+            int mid = start + ((end - start) / 2);
+            if (arr[mid] == target) {
+                ans = mid;
+                break;
+            } else if (arr[mid] > target) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return ans;
+    }
+
+    static void binarySearchInfiniteArray(int arr[], int target) {
+        int start = 0;
+        int end = 1;
+
+        while (target > arr[end]) {            
+            start = end;
+            end *= 2;
+        }
+
+        System.out.println("Range : " + start + " ans " + end);
+
+        int ans = binarySearchAscendingInRange(arr, start, end, target);
+
+        if (ans == -1) {
+            System.out.print(target + " is not present in ");
+        } else {
+            System.out.print(target + " is present at index " + ans + " in ");
+        }
+        printArray(arr);
     }
 }
