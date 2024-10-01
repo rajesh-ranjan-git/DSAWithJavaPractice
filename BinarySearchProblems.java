@@ -41,7 +41,7 @@ public class BinarySearchProblems {
         System.out.println("Answer : " + res);
     }
 
-    static boolean isAllocationPossible(int books[], int maxPages, int students) {        
+    static boolean isAllocationPossible(int books[], int maxPages, int students) {
         int currentStudent = 1;
         int pages = 0;
 
