@@ -1,7 +1,10 @@
-public class BinarySearchProblems {
+public class BinarySearchProblems_1011 {
     public static void main(String[] args) {
-        int arr[] = { 12, 34, 67, 90 };
-        minimumNumberOfPagesAllocation(arr, 2);
+        int books[] = { 12, 34, 67, 90 };
+        minimumNumberOfPagesAllocation(books, 2);
+
+        int weights[] = { 3, 2, 2, 4, 1, 4 };
+        shipWithinDays(weights, 3);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -58,6 +61,58 @@ public class BinarySearchProblems {
             if (currentStudent > students) {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+    static void shipWithinDays(int[] weights, int days) {
+        int start = Integer.MIN_VALUE;
+        int end = 0;
+
+        for (int i = 0; i < weights.length; i++) {
+            if (start < weights[i]) {
+                start = weights[i];
+            }
+
+            end += weights[i];
+        }
+
+        int res = -1;
+
+        while (start <= end) {
+            int mid = start + ((end - start) / 2);
+
+            if (isShipmentPossible(weights, mid, days)) {
+                res = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        if (res == -1) {
+            System.out.println("No possible minimum value found.");
+        } else {
+            System.out.println("Minimum weight capacity : " + res);
+        }
+    }
+    
+    static boolean isShipmentPossible(int[] weights, int maxWeight, int days) {
+        int dayCounter = 1;
+        int sumOfWeight = 0;
+        
+        for (int i = 0; i < weights.length; i++) {
+            sumOfWeight += weights[i];
+
+            if (sumOfWeight > maxWeight) {
+                dayCounter++;
+                sumOfWeight = weights[i];
+            }
+        }
+
+        if (dayCounter > days) {
+            return false;
         }
 
         return true;
