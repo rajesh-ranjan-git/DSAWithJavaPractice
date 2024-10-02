@@ -1,10 +1,19 @@
-public class BinarySearchProblems_1011 {
+public class BinarySearchProblems {
     public static void main(String[] args) {
-        int books[] = { 12, 34, 67, 90 };
-        minimumNumberOfPagesAllocation(books, 2);
+        // int books[] = { 12, 34, 67, 90 };
+        // minimumNumberOfPagesAllocation(books, 2);
 
-        int weights[] = { 3, 2, 2, 4, 1, 4 };
-        shipWithinDays(weights, 3);
+        // int weights[] = { 3, 2, 2, 4, 1, 4 };
+        // shipWithinDays_1011(weights, 3);
+
+        // int[] piles = { 3, 6, 7, 11 };
+        // int[] piles = { 30, 11, 23, 4, 20 };
+        // int[] piles = { 805306368, 805306368, 805306368 };
+        // minEatingSpeed_875(piles, 8);
+
+        // int[] nums = { 1, 2, 5, 9 }; // k = 5
+        int[] nums = { 44, 22, 33, 11, 1 }; // k = 44
+        smallestDivisor_1283(nums, 5);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -66,7 +75,7 @@ public class BinarySearchProblems_1011 {
         return true;
     }
 
-    static void shipWithinDays(int[] weights, int days) {
+    static void shipWithinDays_1011(int[] weights, int days) {
         int start = Integer.MIN_VALUE;
         int end = 0;
 
@@ -101,7 +110,7 @@ public class BinarySearchProblems_1011 {
     static boolean isShipmentPossible(int[] weights, int maxWeight, int days) {
         int dayCounter = 1;
         int sumOfWeight = 0;
-        
+
         for (int i = 0; i < weights.length; i++) {
             sumOfWeight += weights[i];
 
@@ -116,5 +125,91 @@ public class BinarySearchProblems_1011 {
         }
 
         return true;
+    }
+    
+    static void minEatingSpeed_875(int[] piles, int h) {
+        int start = 1;
+        int end = Integer.MIN_VALUE;
+        int res = -1;
+
+        //Finding max
+        for (int i = 0; i < piles.length; i++) {
+            if (end < piles[i]) {
+                end = piles[i];
+            }
+        }
+
+        // Apply binary search on the possible values of K -> (1, max(piles))
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            if (isEatingPossible(piles, mid, h)) {
+                res = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        System.out.println("Minimum banana to eat in 1 hr : " + res);
+    }
+
+    static boolean isEatingPossible(int[] piles, int maxEatingCapacity, int h) {
+        long requiredHours = 0;
+
+        for (int i = 0; i < piles.length; i++) {
+            requiredHours += piles[i] / maxEatingCapacity;
+
+            if (piles[i] % maxEatingCapacity != 0) {
+                requiredHours++;
+            }
+        }
+
+        if (requiredHours > h) {
+            return false;
+        }
+
+        return true;
+    }
+    
+    static void smallestDivisor_1283(int[] nums, int threshold) {
+        int start = 1;
+        int end = Integer.MIN_VALUE;
+        int res = -1;
+
+        // Find maximum divisor that can divide all the elements in array.
+        for (int i = 0; i < nums.length; i++) {
+            if (end < nums[i]) {
+                end = nums[i];
+            }
+        }
+
+        // Apply binary search on the given range.
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (possibleDivisorResultSum(nums, mid) <= threshold) {
+                res = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        System.out.println(res);
+    }
+
+    static int possibleDivisorResultSum(int[] nums, int divisor) {
+        int sum = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            sum += (nums[i] / divisor);
+
+            if (nums[i] % divisor != 0) {
+                sum++;
+            }
+        }
+
+        return sum;
     }
 }
