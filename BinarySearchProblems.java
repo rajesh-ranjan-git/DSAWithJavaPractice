@@ -12,8 +12,12 @@ public class BinarySearchProblems {
         // minEatingSpeed_875(piles, 8);
 
         // int[] nums = { 1, 2, 5, 9 }; // k = 5
-        int[] nums = { 44, 22, 33, 11, 1 }; // k = 44
-        smallestDivisor_1283(nums, 5);
+        // int[] nums = { 44, 22, 33, 11, 1 }; // k = 44
+        // smallestDivisor_1283(nums, 5);
+
+        // int[] quantities = { 11, 6 };
+        int[] quantities = { 15, 10, 10 };
+        minimizedMaximum_2064(7, quantities);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -211,5 +215,48 @@ public class BinarySearchProblems {
         }
 
         return sum;
+    }
+
+    static void minimizedMaximum_2064(int n, int[] quantities) {
+        int start = 1; // To avoid zero division error.
+        int end = Integer.MIN_VALUE; // To find maximum value
+        int res = -1;
+
+        for (int i = 0; i < quantities.length; i++) {
+            if (end < quantities[i]) {
+                end = quantities[i];
+            }
+        }
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (isDistributionPossible(quantities, mid, n)) {
+                res = mid;
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        System.out.println(res);
+    }
+
+    static boolean isDistributionPossible(int[] quantities, int maxProducts, int stores) {
+        int storeCount = 0;
+
+        for (int i = 0; i < quantities.length; i++) {
+            storeCount += quantities[i] / maxProducts;
+
+            if (quantities[i] % maxProducts != 0) {
+                storeCount++;
+            }
+
+            if (storeCount > stores) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
