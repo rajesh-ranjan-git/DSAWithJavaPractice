@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class BinarySearchProblems {
     public static void main(String[] args) {
         // int books[] = { 12, 34, 67, 90 };
@@ -16,8 +18,11 @@ public class BinarySearchProblems {
         // smallestDivisor_1283(nums, 5);
 
         // int[] quantities = { 11, 6 };
-        int[] quantities = { 15, 10, 10 };
-        minimizedMaximum_2064(7, quantities);
+        // int[] quantities = { 15, 10, 10 };
+        // minimizedMaximum_2064(7, quantities);
+
+        int[] stalls = { 1, 2, 4, 8, 9 };
+        aggressiveCows(stalls, 5, 3);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -258,5 +263,52 @@ public class BinarySearchProblems {
         }
 
         return true;
+    }
+
+    static void aggressiveCows(int[] stalls, int positionOfStalls, int noOfCows) {
+        // If not enough stalls, then return
+        if (stalls.length < noOfCows) {
+            System.out.println("Cows arrangement is not possible as no. of coes exceeds number of stalls.");
+            return;
+        }
+
+        // Sort your arrays.
+        Arrays.sort(stalls);
+
+        int start = 1;
+        int end = stalls[positionOfStalls - 1] - stalls[0];
+        int maximumDifference = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (isArrangementPossible(stalls, mid, noOfCows)) {
+                maximumDifference = mid;
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        System.out.println("Maximum difference is : " + maximumDifference);
+    }
+    
+    static boolean isArrangementPossible(int stalls[], int minDistance, int noOfCows) {
+        int cowsCount = 1;
+        int lastCowDist = stalls[0];
+
+        for (int i = 1; i < stalls.length; i++) {
+            // Cjeck if minimum distance obtained is maintained then increase count of cows ans assign new location.
+            if (stalls[i] - lastCowDist >= minDistance) {
+                cowsCount++;
+                lastCowDist = stalls[i];
+            }
+
+            if (cowsCount >= noOfCows) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
