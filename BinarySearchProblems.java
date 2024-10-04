@@ -21,8 +21,13 @@ public class BinarySearchProblems {
         // int[] quantities = { 15, 10, 10 };
         // minimizedMaximum_2064(7, quantities);
 
-        int[] stalls = { 1, 2, 4, 8, 9 };
-        aggressiveCows(stalls, 5, 3);
+        // int[] stalls = { 1, 2, 4, 8, 9 };
+        // aggressiveCows(stalls, 5, 3);
+
+        int[] nums1 = { 1, 2 };
+        int[] nums2 = { 3, 4 };
+
+        findMedianSortedArrays_4(nums1, nums2);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -298,7 +303,7 @@ public class BinarySearchProblems {
         int lastCowDist = stalls[0];
 
         for (int i = 1; i < stalls.length; i++) {
-            // Cjeck if minimum distance obtained is maintained then increase count of cows ans assign new location.
+            // Check if minimum distance obtained is maintained then increase count of cows ans assign new location.
             if (stalls[i] - lastCowDist >= minDistance) {
                 cowsCount++;
                 lastCowDist = stalls[i];
@@ -310,5 +315,88 @@ public class BinarySearchProblems {
         }
 
         return false;
+    }
+
+    // static void findMedianSortedArrays_4(int[] nums1, int[] nums2) {
+    //     int[] nums3 = new int[nums1.length + nums2.length];
+
+    //     for (int i = 0; i < nums1.length; i++) {
+    //         nums3[i] = nums1[i];
+    //     }
+
+    //     int j = 0;
+    //     for (int i = nums1.length; i < nums3.length; i++) {
+    //         nums3[i] = nums2[j];
+    //         j++;
+    //     }
+
+    //     printArray(nums3);
+
+    //     Arrays.sort(nums3);
+
+    //     printArray(nums3);
+
+    //     if (nums3.length % 2 == 0) {
+    //         System.out.println("nums3 length is even : " + nums3.length);
+    //         System.out.println(
+    //                 "((N/2 - 1) + N/2)/2 : " + ((nums3[((nums3.length / 2) - 1)] + nums3[(nums3.length / 2)]) / 2));
+    //     } else {
+    //         System.out.println("nums3 length is even");
+    //         System.out.println("nums3.length / 2" + (nums3[nums3.length / 2]));
+    //     }
+    // }
+    
+    static void findMedianSortedArrays_4(int[] nums1, int[] nums2) {
+        // Make num1 as min length array
+        // Call same function and change swap the params (recursion)
+        // if nums1 was greater and nums2 was smaller and we swapped them, now nums1 is smaller and num2 is greater.
+        if (nums1.length > nums2.length) {
+            findMedianSortedArrays_4(nums2, nums1);
+            return;
+        }
+
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int N = n1 + n2;
+        int start = 0;
+        int end = n1;
+
+        while (start <= end) {
+            int cut1 = start + ((end - start) / 2); // mid
+            int cut2 = N / 2 - cut1; // (n1 + n2)/2 - length of cut1
+
+            int l1 = (cut1 == 0) ? Integer.MIN_VALUE : nums1[cut1 - 1];
+            int l2 = (cut2 == 0) ? Integer.MIN_VALUE : nums2[cut2 - 1];
+            int r1 = (cut1 == n1) ? Integer.MAX_VALUE : nums1[cut1];
+            int r2 = (cut2 == n2) ? Integer.MAX_VALUE : nums2[cut2];
+
+            // Check if cut is valid
+            if (l1 <= r2 && l2 <= r1) {
+                // N is even or odd
+                if (N % 2 == 0) {
+                    System.out.println((((l1 > l2 ? l1 : l2) + (r1 > r2 ? r2 : r1)) / 2.0)); // Two medians, so take mean (avg) of medians
+                } else {
+                    System.out.println((double)(r1 > r2 ? r2 : r1));
+                }
+            }
+            if (l1 > r2) {
+                end = cut1 - 1;
+            } else {
+                start = cut1 + 1;
+            }
+        }
+    }
+    
+    static void printArray(int arr[]) {
+        System.out.print("arr : [");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i]);
+            if (i != arr.length - 1) {
+                System.out.print(", ");
+            } else {
+                System.out.print("]");
+            }
+        }
+        System.out.println();
     }
 }
