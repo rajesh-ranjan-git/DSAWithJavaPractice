@@ -28,9 +28,15 @@ public class BinarySearchProblems {
         // int[] nums2 = { 3, 4 };
         // findMedianSortedArrays_4(nums1, nums2);
 
-        int[] nums1 = { 2, 3, 6, 7, 9 };
-        int[] nums2 = { 1, 4, 8, 10 };
-        kthElementInSortedArray(nums1, nums2, 5);
+        // int[] nums1 = { 2, 3, 6, 7, 9 };
+        // int[] nums2 = { 1, 4, 8, 10 };
+        // kthElementInSortedArray(nums1, nums2, 5);
+
+        // int[] nums = { 1, 1, 2, 3, 3, 4, 4, 8, 8 };
+        // singleElementInSortedArray(nums);
+
+        int num = 16;
+        sqrt(8);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -421,6 +427,55 @@ public class BinarySearchProblems {
                 end = cut1 - 1;
             } else {
                 start = cut1 + 1;
+            }
+        }
+    }
+
+    static void singleElementInSortedArray(int[] nums) {
+        int start = 0;
+        int end = nums.length - 2;
+
+        while (start <= end) {
+            int mid = start + ((end - start) / 2);
+
+            if (nums[mid] == nums[mid ^ 1]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        // while (start < end) {
+        //     int mid = start + ((end - start) / 2);
+
+        //     if ((mid % 2 == 0) && (nums[mid] == nums[mid - 1])) {
+        //         end = mid - 1;
+        //     } else if ((mid % 2 == 0) && (nums[mid] == nums[mid + 1])) {
+        //         start = mid + 1;
+        //     } else if ((mid % 2 != 0) && (nums[mid] == nums[mid - 1])) {
+        //         start = mid + 1;
+        //     } else if ((mid % 2 != 0) && (nums[mid] == nums[mid + 1])) {
+        //         end = mid - 1;
+        //     }
+        // }
+
+        System.out.println(nums[start]);
+    }
+
+    static void sqrt(int num) {
+        int start = 0;
+        int end = num;
+
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+
+            if (mid * mid == num) {
+                System.out.println(mid);
+                break;
+            } else if (mid * mid < num) {
+                start = mid + 1;
+            } else {
+                end = mid + 1;
             }
         }
     }
