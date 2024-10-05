@@ -24,10 +24,13 @@ public class BinarySearchProblems {
         // int[] stalls = { 1, 2, 4, 8, 9 };
         // aggressiveCows(stalls, 5, 3);
 
-        int[] nums1 = { 1, 2 };
-        int[] nums2 = { 3, 4 };
+        // int[] nums1 = { 1, 2 };
+        // int[] nums2 = { 3, 4 };
+        // findMedianSortedArrays_4(nums1, nums2);
 
-        findMedianSortedArrays_4(nums1, nums2);
+        int[] nums1 = { 2, 3, 6, 7, 9 };
+        int[] nums2 = { 1, 4, 8, 10 };
+        kthElementInSortedArray(nums1, nums2, 5);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -376,7 +379,7 @@ public class BinarySearchProblems {
                 if (N % 2 == 0) {
                     System.out.println((((l1 > l2 ? l1 : l2) + (r1 > r2 ? r2 : r1)) / 2.0)); // Two medians, so take mean (avg) of medians
                 } else {
-                    System.out.println((double)(r1 > r2 ? r2 : r1));
+                    System.out.println((double) (r1 > r2 ? r2 : r1));
                 }
             }
             if (l1 > r2) {
@@ -386,17 +389,39 @@ public class BinarySearchProblems {
             }
         }
     }
-    
-    static void printArray(int arr[]) {
-        System.out.print("arr : [");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i]);
-            if (i != arr.length - 1) {
-                System.out.print(", ");
+
+    static void kthElementInSortedArray(int[] nums1, int[] nums2, int k) {
+        // Make num1 as min length array
+        // Call same function and change swap the params (recursion)
+        // if nums1 was greater and nums2 was smaller and we swapped them, now nums1 is smaller and num2 is greater.
+        if (nums1.length > nums2.length) {
+            findMedianSortedArrays_4(nums2, nums1);
+            return;
+        }
+
+        int n1 = nums1.length;
+        int n2 = nums2.length;
+        int start = Math.max(0, k - n2);
+        int end = Math.min(k, n1);
+
+        while (start <= end) {
+            int cut1 = start + ((end - start) / 2); // mid
+            int cut2 = k - cut1; // k - length of cut1
+
+            int l1 = (cut1 == 0) ? Integer.MIN_VALUE : nums1[cut1 - 1];
+            int l2 = (cut2 == 0) ? Integer.MIN_VALUE : nums2[cut2 - 1];
+            int r1 = (cut1 == n1) ? Integer.MAX_VALUE : nums1[cut1];
+            int r2 = (cut2 == n2) ? Integer.MAX_VALUE : nums2[cut2];
+
+            // Check if cut is valid
+            if (l1 <= r2 && l2 <= r1) {
+                System.out.println(Math.max(l1, l2));
+            }
+            if (l1 > r2) {
+                end = cut1 - 1;
             } else {
-                System.out.print("]");
+                start = cut1 + 1;
             }
         }
-        System.out.println();
     }
 }
