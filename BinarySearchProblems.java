@@ -35,8 +35,9 @@ public class BinarySearchProblems {
         // int[] nums = { 1, 1, 2, 3, 3, 4, 4, 8, 8 };
         // singleElementInSortedArray(nums);
 
-        int num = 16;
-        sqrt(8);
+        // sqrt_69(146);
+
+        noOfPerfectSquares(9);
     }
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
@@ -462,21 +463,51 @@ public class BinarySearchProblems {
         System.out.println(nums[start]);
     }
 
-    static void sqrt(int num) {
-        int start = 0;
+    static void sqrt_69(int num) {
+        int start = 1;
         int end = num;
 
-        while (start < end) {
+        while (start <= end) {
             int mid = start + (end - start) / 2;
 
-            if (mid * mid == num) {
-                System.out.println(mid);
-                break;
-            } else if (mid * mid < num) {
+            if (mid <= num / mid) {
+                if (num % mid == 0 && mid == num / mid) {
+                    System.out.println(mid);
+                    return;
+                }
                 start = mid + 1;
             } else {
-                end = mid + 1;
+                end = mid - 1;
             }
         }
+
+        System.out.println(end);
+    }
+
+    static void noOfPerfectSquares(int num) {
+        int start = 1;
+        int end = num;
+        int res = -1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (mid <= num / mid) {
+                if (num % mid == 0 && mid == num / mid) {
+                    res = mid;
+                    break;
+                }
+                start = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        if (res != -1) {
+            System.out.println(res - 1);
+        } else {
+            System.out.println(start - 1);
+        }
+        
     }
 }
