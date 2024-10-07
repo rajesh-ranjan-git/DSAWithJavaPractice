@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class MatrixProblems {
     public static void main(String[] args) {
         // int nums[][] = { { 1, 3, 5 }, { 2, 6, 9 }, { 3, 6, 9 } };
@@ -15,12 +18,19 @@ public class MatrixProblems {
         //         { 18, 21, 23, 26, 30 } };
         // search2DMatrix2_240(matrix, 24);
 
-        int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        // int[][] matrix = {
+        //         { 1, 2, 3 },
+        //         { 4, 5, 6 },
+        //         { 7, 8, 9 }
+        //     };
         // transpose(matrix);
         // int[][] matrix = { { 1, 2, 3 }, { 4, 5, 6 } };
         // transpose_867(matrix);
         // rotateMatrixClockWise_48(matrix);
-        rotateMatrixAntiClockWise(matrix);
+        // rotateMatrixAntiClockWise(matrix);
+
+        // spiralMatrix_54(matrix);
+        spiralMatrix2_59(3);
     }
 
     static void medianOfRowWiseSortedMatrix(int[][] nums, int R, int C) {
@@ -235,5 +245,92 @@ public class MatrixProblems {
                 matrix[matrix.length - 1 - i][j] = temp;
             }
         }
+    }
+
+    static void spiralMatrix_54(int[][] matrix) {
+        int startingRow = 0;
+        int startingCol = 0;
+        int endingRow = matrix.length - 1;
+        int endingCol = matrix[0].length - 1;
+
+        List<Integer> result = new ArrayList<>();
+
+        while (startingCol <= endingCol && startingRow <= endingRow) {
+            // First Row
+            for (int j = startingCol; j <= endingCol; j++) {
+                result.add(matrix[startingRow][j]);
+            }
+            startingRow++;
+
+            // Last Col
+            for (int i = startingRow; i <= endingRow; i++) {
+                result.add(matrix[i][endingCol]);
+            }
+            endingCol--;
+
+            // Last Row
+            if (startingRow <= endingRow) {
+                for (int j = endingCol; j >= startingCol; j--) {
+                    result.add(matrix[endingRow][j]);
+                }
+                endingRow--;
+            }
+
+            // First Col
+            if (startingCol <= endingCol) {
+                for (int i = endingRow; i >= startingRow; i--) {
+                    result.add(matrix[i][startingCol]);
+                }
+                startingCol++;
+            }
+        }
+
+        System.out.println(result);
+    }
+    
+    static void spiralMatrix2_59(int n) {
+        int startingRow = 0;
+        int startingCol = 0;
+        int endingRow = n - 1;
+        int endingCol = n - 1;
+
+        int[][] matrix = new int[n][n];
+        int value = 1;
+
+        while (startingCol <= endingCol && startingRow <= endingRow) {
+            // First Row
+            for (int j = startingCol; j <= endingCol; j++) {
+                matrix[startingRow][j] = value;
+                value++;
+            }
+            startingRow++;
+
+            // Last Col
+            for (int i = startingRow; i <= endingRow; i++) {
+                matrix[i][endingCol] = value;
+                value++;
+            }
+            endingCol--;
+
+            // Last Row
+            if (startingRow <= endingRow) {
+                for (int j = endingCol; j >= startingCol; j--) {
+                    matrix[endingRow][j] = value;
+                    value++;
+                }
+                endingRow--;
+            }
+
+            // First Col
+            if (startingCol <= endingCol) {
+                for (int i = endingRow; i >= startingRow; i--) {
+                    matrix[i][startingCol] = value;
+                    value++;
+                }
+                startingCol++;
+            }
+        }
+        
+        System.out.println(matrix);
     }
 }
