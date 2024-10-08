@@ -1,10 +1,10 @@
 public class BitonicArray {
     public static void main(String[] args) {
         int arr[] = { 2, 4, 6, 8, 11, 16, 13, 11, 9, 4, 3, 2, 1 };
-        minElement(arr);
+        // minElement(arr);
         System.out.print("Found peak element " + arr[findPeakElement(arr)] + " at " + findPeakElement(arr) + " in ");
         printArray(arr);
-        searchElementInBitonicArray(arr, 9);
+        // searchElementInBitonicArray(arr, 9);
     }
 
     static void printArray(int arr[]) {
