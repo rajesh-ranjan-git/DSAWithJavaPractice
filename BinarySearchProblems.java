@@ -42,7 +42,7 @@ public class BinarySearchProblems {
     
     static void minimumNumberOfPagesAllocation(int books[], int students) {
         // Each student will be allocated at least 1 book.
-        if (students >= books.length) {
+        if (books.length < students) {
             System.out.println("Allocation of books is not possible.");
             return;
         }
@@ -283,7 +283,7 @@ public class BinarySearchProblems {
     static void aggressiveCows(int[] stalls, int positionOfStalls, int noOfCows) {
         // If not enough stalls, then return
         if (stalls.length < noOfCows) {
-            System.out.println("Cows arrangement is not possible as no. of coes exceeds number of stalls.");
+            System.out.println("Cows arrangement is not possible as no. of cows exceeds number of stalls.");
             return;
         }
 
