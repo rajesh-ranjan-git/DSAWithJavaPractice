@@ -119,7 +119,7 @@ public class MoreSearchingAlgorithms {
         int start = 0;
         int end = nums.length - 1;
 
-        // Apply ternary search and the condition is to avoid ArrayIndexOutOfBounds Exception
+        // Apply binary search and the condition is to avoid ArrayIndexOutOfBounds Exception
         while (start <= end && target >= nums[start] && target <= nums[end]) {
             if (nums[start] == nums[end]) {
                 if (nums[start] == target) {
