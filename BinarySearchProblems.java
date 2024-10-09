@@ -313,7 +313,7 @@ public class BinarySearchProblems {
         int lastCowDist = stalls[0];
 
         for (int i = 1; i < stalls.length; i++) {
-            // Check if minimum distance obtained is maintained then increase count of cows ans assign new location.
+            // Check if minimum distance obtained is maintained then increase count of cows and assign new location.
             if (stalls[i] - lastCowDist >= minDistance) {
                 cowsCount++;
                 lastCowDist = stalls[i];
@@ -358,7 +358,7 @@ public class BinarySearchProblems {
     
     static void findMedianSortedArrays_4(int[] nums1, int[] nums2) {
         // Make num1 as min length array
-        // Call same function and change swap the params (recursion)
+        // Call same function and swap the params (recursion)
         // if nums1 was greater and nums2 was smaller and we swapped them, now nums1 is smaller and num2 is greater.
         if (nums1.length > nums2.length) {
             findMedianSortedArrays_4(nums2, nums1);
