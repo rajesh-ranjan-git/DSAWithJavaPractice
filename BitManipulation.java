@@ -19,7 +19,7 @@ public class BitManipulation {
         // System.out.println((char)(convertToLowerCaseWithSpace('A')));
         // System.out.println((char)(convertToUpperCaseWithSpace('a')));
         // System.out.println((char)(convertToUpperCaseWithUnderscore('a')));
-        // swapNumbers(8, 9);
+        // swapNumbers(8, 99);
         // int arr[] = {2, 4, 2, 6, 3, 3 , 1, 1, 6};
         // printUniqueElement(arr);
         // int arr2[] = {7, 2, 4, 2, 6, 3, 3 , 1, 1, 6};
