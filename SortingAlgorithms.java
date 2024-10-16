@@ -1,16 +1,17 @@
 public class SortingAlgorithms {
     public static void main(String[] args) {
-        int arr[] = { 54, 8, 54, 98, 45, 68, 98, 52, 98 };
-        // int arr[] = { 2, 7, 1, 5, 8, 1, 12 };
+        // int arr[] = { 54, 8, 54, 98, 45, 68, 98, 52, 98 };
+        int arr[] = { 2, 7, 1, 5, 8, 1, 12 };
 
-        printArray(arr);
-        // insertionSort(arr);
-        // selectionSort(arr);
-        // selectionSortBiDirectional(arr);
-        // bubbleSort(arr);
-        // bubbleSortOptimized(arr);
-        brickSort(arr);
-        printArray(arr);
+        // printArray(arr); // Time Complexity : O(N^2)
+        // insertionSort(arr); // Time Complexity : O(N^2)
+        // selectionSort(arr); // Time Complexity : O(N^2)
+        // selectionSortBiDirectional(arr); // Time Complexity : O(N^2)
+        // bubbleSort(arr); // Time Complexity : O(N^2)
+        // bubbleSortOptimized(arr); // Time Complexity : O(N^2)
+        // brickSort(arr); // Time Complexity : O(N^2)
+        countingSort(arr); // Time Complexity : O(N + K)
+        // printArray(arr);
     }
 
     static void printArray(int arr[]) {
@@ -115,6 +116,7 @@ public class SortingAlgorithms {
     }
     
     static void brickSort(int[] arr) {
+        //This sorting algorithm is also called Odd-Even Sort or Parity Sort.
         boolean isSorted = false;
         while (!isSorted) {
             boolean flag = false;
@@ -136,6 +138,45 @@ public class SortingAlgorithms {
                 isSorted = true;
             }
         }
+    }
+    
+    static void countingSort(int[] arr) {
+        // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers.
+
+        int k = Integer.MIN_VALUE;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > k) {
+                k = arr[i];
+            }
+        }
+
+        // Empty array or maximum element is not findable.
+        if (k == Integer.MIN_VALUE) {
+            return;
+        }
+
+        int[] countArr = new int[k + 1];
+
+        // Find frequency
+        for (int i = 0; i < arr.length; i++) {
+            int index = arr[i];
+            countArr[index]++;
+        }
+
+        // Find cumulative frequency
+        for (int i = 1; i <= k; i++) {
+            countArr[i] += countArr[i - 1];
+        }
+
+        int[] res = new int[arr.length];
+        // Sorted Array
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int index = --countArr[arr[i]];
+            res[index] = arr[i];
+        }
+        System.out.print("Sorted ");
+        printArray(res);        
     }
     
     static void swap (int[] arr, int idx1, int idx2) {
