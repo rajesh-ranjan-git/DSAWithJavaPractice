@@ -8,7 +8,8 @@ public class SortingAlgorithms {
         // selectionSort(arr);
         // selectionSortBiDirectional(arr);
         // bubbleSort(arr);
-        bubbleSortOptimized(arr);
+        // bubbleSortOptimized(arr);
+        brickSort(arr);
         printArray(arr);
     }
 
@@ -109,6 +110,30 @@ public class SortingAlgorithms {
             if (!flag) {
                 // If no swap done
                 break;
+            }
+        }
+    }
+    
+    static void brickSort(int[] arr) {
+        boolean isSorted = false;
+        while (!isSorted) {
+            boolean flag = false;
+            // swap even elements
+            for (int i = 0; i < arr.length - 1; i+=2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr, i, i + 1);
+                    flag = true;
+                }
+            }
+            // swap odd elements
+            for (int i = 1; i < arr.length - 1; i+=2) {
+                if (arr[i] > arr[i + 1]) {
+                    swap(arr, i, i + 1);
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                isSorted = true;
             }
         }
     }
