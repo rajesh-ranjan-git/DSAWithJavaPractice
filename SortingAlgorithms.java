@@ -3,15 +3,16 @@ public class SortingAlgorithms {
         // int arr[] = { 54, 8, 54, 98, 45, 68, 98, 52, 98 };
         int arr[] = { 2, 7, 1, 5, 8, 1, 12 };
 
-        // printArray(arr); // Time Complexity : O(N^2)
+        printArray(arr);
         // insertionSort(arr); // Time Complexity : O(N^2)
         // selectionSort(arr); // Time Complexity : O(N^2)
         // selectionSortBiDirectional(arr); // Time Complexity : O(N^2)
         // bubbleSort(arr); // Time Complexity : O(N^2)
         // bubbleSortOptimized(arr); // Time Complexity : O(N^2)
         // brickSort(arr); // Time Complexity : O(N^2)
-        countingSort(arr); // Time Complexity : O(N + K)
-        // printArray(arr);
+        // countingSort(arr); // Time Complexity : O(N + K)
+        radixSort(arr); // Time Complexity : O(N) + O(D(N + K)) -> D = size of max digit, K = 9
+        printArray(arr);
     }
 
     static void printArray(int arr[]) {
@@ -141,7 +142,7 @@ public class SortingAlgorithms {
     }
     
     static void countingSort(int[] arr) {
-        // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers.
+        // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers. It is not in-place sorting.
 
         int k = Integer.MIN_VALUE;
 
@@ -176,7 +177,56 @@ public class SortingAlgorithms {
             res[index] = arr[i];
         }
         System.out.print("Sorted ");
-        printArray(res);        
+        printArray(res);
+    }
+
+    static void countingSort(int[] arr, int digit) {
+        int k = 9;
+        int[] countArr = new int[k + 1];
+
+        // Find frequency
+        for (int i = 0; i < arr.length; i++) {
+            int index = (arr[i] / digit) % 10;
+            countArr[index]++;
+        }
+
+        // Find cumulative frequency
+        for (int i = 1; i <= k; i++) {
+            countArr[i] += countArr[i - 1];
+        }
+
+        int[] res = new int[arr.length];
+        // Sorted Array
+        for (int i = arr.length - 1; i >= 0; i--) {
+            int index = --countArr[(arr[i] / digit) % 10];
+            res[index] = arr[i];
+        }
+
+        // Copy back to original array.
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = res[i];
+        }
+    }
+    
+    static void radixSort(int[] arr) {
+        // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers. It is not in-place sorting.
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+        }
+
+        // Empty array or maximum element is not findable.
+        if (max == Integer.MIN_VALUE) {
+            return;
+        }
+
+        for (int digit = 1; max / digit > 0; digit *= 10) {
+            countingSort(arr, digit);
+        }      
     }
     
     static void swap (int[] arr, int idx1, int idx2) {
