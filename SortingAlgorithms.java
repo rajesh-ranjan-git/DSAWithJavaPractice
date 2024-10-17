@@ -11,7 +11,8 @@ public class SortingAlgorithms {
         // bubbleSortOptimized(arr); // Time Complexity : O(N^2)
         // brickSort(arr); // Time Complexity : O(N^2)
         // countingSort(arr); // Time Complexity : O(N + K)
-        radixSort(arr); // Time Complexity : O(N) + O(D(N + K)) -> D = size of max digit, K = 9
+        // radixSort(arr); // Time Complexity : O(N) + O(D(N + K)) -> D = size of max digit, K = 9
+        // pigeonholeSort(arr); // Time Complexity : O(N + K), Space Complexity : O(N + K) -> N is no. of input so we can consider O(K)
         printArray(arr);
     }
 
@@ -227,6 +228,43 @@ public class SortingAlgorithms {
         for (int digit = 1; max / digit > 0; digit *= 10) {
             countingSort(arr, digit);
         }      
+    }
+    
+    static void pigeonholeSort(int[] arr) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+        // Empty array or maximum or minimum element is not findable.
+        if (max == Integer.MIN_VALUE || min == Integer.MAX_VALUE) {
+            return;
+        }
+
+        int[] pigeonhole = new int[max - min + 2];
+
+        // Find frequency
+        for (int i = 0; i < arr.length; i++) {
+            int index = arr[i] - min;
+            pigeonhole[index]++;
+        }
+
+        // Fill the original array
+        int insertionIndex = 0;
+        for (int j = 0; j < max - min + 1; j++) {
+            while (pigeonhole[j] > 0) {
+                arr[insertionIndex] = j + min;
+                insertionIndex++;
+                pigeonhole[j]--;
+            }
+        }
     }
     
     static void swap (int[] arr, int idx1, int idx2) {
