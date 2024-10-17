@@ -64,7 +64,7 @@ public class SortingAlgorithms {
             swap(arr, minIdx, i);
         }
     }
-    
+
     static void selectionSortBiDirectional(int[] arr) {
         int k = arr.length - 1;
         for (int i = 0; i < k; i++) {
@@ -121,7 +121,7 @@ public class SortingAlgorithms {
             }
         }
     }
-    
+
     static void brickSort(int[] arr) {
         //This sorting algorithm is also called Odd-Even Sort or Parity Sort.
         boolean isSorted = false;
@@ -146,7 +146,7 @@ public class SortingAlgorithms {
             }
         }
     }
-    
+
     static void countingSort(int[] arr) {
         // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers. It is not in-place sorting.
 
@@ -213,7 +213,7 @@ public class SortingAlgorithms {
             arr[i] = res[i];
         }
     }
-    
+
     static void radixSort(int[] arr) {
 
         int max = Integer.MIN_VALUE;
@@ -233,7 +233,7 @@ public class SortingAlgorithms {
             countingSort(arr, digit);
         }      
     }
-    
+
     static void pigeonholeSort(int[] arr) {
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
@@ -270,7 +270,7 @@ public class SortingAlgorithms {
             }
         }
     }
-    
+
     static void cycleSort1ToN(int[] arr) { // for range 1 to n
         int n = arr.length;
         int index = 0;
@@ -298,7 +298,7 @@ public class SortingAlgorithms {
             }
         }
     }
-    
+
     static void cycleSort(int[] arr) {
         // This is very unstable algorithm.
         for (int cycles = 0; cycles < arr.length - 1; cycles++) {
@@ -353,7 +353,7 @@ public class SortingAlgorithms {
             }
         }
     }
-    
+
     static void swap (int[] arr, int idx1, int idx2) {
         int temp = arr[idx1];
         arr[idx1] = arr[idx2];
