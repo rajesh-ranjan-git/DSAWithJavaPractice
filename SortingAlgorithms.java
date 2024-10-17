@@ -1,7 +1,9 @@
 public class SortingAlgorithms {
     public static void main(String[] args) {
-        // int arr[] = { 54, 8, 54, 98, 45, 68, 98, 52, 98 };
-        int arr[] = { 2, 7, 1, 5, 8, 1, 12 };
+        int arr[] = { 54, 8, 54, 98, 45, 68, 98, 52, 98 };
+        // int arr[] = { 2, 7, 1, 5, 8, 1, 12 };
+        // int arr[] = { 2, 3, 1, 5, 4 };
+        // int arr[] = { 2, 3, 1, 5, 4, 0 };
 
         printArray(arr);
         // insertionSort(arr); // Time Complexity : O(N^2)
@@ -13,6 +15,9 @@ public class SortingAlgorithms {
         // countingSort(arr); // Time Complexity : O(N + K)
         // radixSort(arr); // Time Complexity : O(N) + O(D(N + K)) -> D = size of max digit, K = 9
         // pigeonholeSort(arr); // Time Complexity : O(N + K), Space Complexity : O(N + K) -> N is no. of input so we can consider O(K)
+        // cycleSort1ToN(arr); // Range is 1 to N, Time Complexity : O(N), Space complexity : O(1), This is a variant of Cycle Sort.
+        // cycleSort0ToN(arr); // Range is 0 to N, Time Complexity : O(N), Space complexity : O(1), This is a variant of Cycle Sort.
+        cycleSort(arr); // Time Complexity : O(N^2)
         printArray(arr);
     }
 
@@ -262,6 +267,89 @@ public class SortingAlgorithms {
                 arr[insertionIndex] = j + min;
                 insertionIndex++;
                 pigeonhole[j]--;
+            }
+        }
+    }
+    
+    static void cycleSort1ToN(int[] arr) { // for range 1 to n
+        int n = arr.length;
+        int index = 0;
+        while (index < n) {
+            int element = arr[index];
+            int actualPos = element - 1;
+            if (arr[index] < n && arr[index] != arr[actualPos]) {
+                swap(arr, index, actualPos);
+            } else {
+                index++;
+            }
+        }
+    }
+
+    static void cycleSort0ToN(int[] arr) { // for range 0 to n
+        int n = arr.length;
+        int index = 0;
+        while (index < n) {
+            int element = arr[index];
+            int actualPos = element;
+            if (arr[index] < n && arr[index] != arr[actualPos]) {
+                swap(arr, index, actualPos);
+            } else {
+                index++;
+            }
+        }
+    }
+    
+    static void cycleSort(int[] arr) {
+        // This is very unstable algorithm.
+        for (int cycles = 0; cycles < arr.length - 1; cycles++) {
+            int pos = cycles;
+            int item = arr[cycles];
+
+            // Find number of smaller elements
+            for (int i = cycles + 1; i < arr.length; i++) {
+                if (arr[i] < item) {
+                    pos++;
+                }
+            }
+
+            // Element is at correct position
+            if (pos == cycles) {
+                continue;
+            }
+
+            // Ignore duplicates
+            while (arr[pos] == item) {
+                pos++;
+            }
+
+            // If smaller elements are found perform swapping
+            if (pos != cycles) {
+                int temp = arr[pos];
+                arr[pos] = item;
+                item = temp;
+            }
+
+            // Check if more swaps are required
+            while (pos != cycles) {
+                pos = cycles;
+
+                // Find number of smaller elements
+                for (int i = cycles + 1; i < arr.length; i++) {
+                    if (arr[i] < item) {
+                        pos++;
+                    }
+                }
+
+                // Ignore duplicates
+                while (arr[pos] == item) {
+                    pos++;
+                }
+
+                if (item != arr[pos]) {
+                    int temp = arr[pos];
+                    arr[pos] = item;
+                    item = temp;
+                }
             }
         }
     }
