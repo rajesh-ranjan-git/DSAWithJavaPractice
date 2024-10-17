@@ -210,7 +210,6 @@ public class SortingAlgorithms {
     }
     
     static void radixSort(int[] arr) {
-        // This sort is also called no comparison algorithm and is not considered good and it wastes too much spaces and cannot handle negative numbers. It is not in-place sorting.
 
         int max = Integer.MIN_VALUE;
 
