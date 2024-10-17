@@ -97,16 +97,21 @@ public class SortingAlogProblems {
 
     static void findAllDuplicateNumber_442_Better(int[] arr) {
         List<Integer> list = new ArrayList<Integer>();
+        int count = 0;
         for (int i = 0; i < arr.length; i++) {
             int element = Math.abs(arr[i]);
             int actualIdx = element - 1;
 
             if (arr[actualIdx] < 0) {
+                count++;
                 list.add(element);
+            } else { // If count is needed
+                arr[actualIdx] = -1 * arr[actualIdx];
             }
-            arr[actualIdx] = -1 * arr[actualIdx];
+            // arr[actualIdx] = -1 * arr[actualIdx]; // If count is not needed
         }
 
         System.out.println(list);
+        System.out.println(count);
     }
 }
